@@ -6,13 +6,14 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 03:24:28 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/11/04 19:28:36 by lmenigau         ###   ########.fr       */
+/*   Updated: 2017/11/04 19:37:54 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <SDL2/SDL.h>
+#include "rt.h"
 
-int main(int argc, char *argv[])
+int main(void)
 {
 
 	SDL_Window *window;
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
 	window = SDL_CreateWindow("SDL_CreateTexture",
 			SDL_WINDOWPOS_UNDEFINED,
 			SDL_WINDOWPOS_UNDEFINED,
-			1024, 768,
+			WIDTH, HEIGHT,
 			SDL_WINDOW_RESIZABLE);
 
 	r.w = 100;
