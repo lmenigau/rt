@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 03:24:28 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/11/07 05:57:13 by lmenigau         ###   ########.fr       */
+/*   Updated: 2017/11/28 01:44:09 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ void	event_loop(t_sdl	*sdl)
 			break;
 		for (int i = 0; i < HEIGHT; i++)
 			for(int j=0; j< WIDTH; j++)
-				sdl->pixels[i][j] = 0xFFFF;
-		for (int i = 0; i < HEIGHT; i++)
-			for(int j=0; j< WIDTH; j++)
-				sdl->pixels[i][j] = (int)0xFF000000;
+				sdl->pixels[i][j] = 0xFFFF00;
 		SDL_UpdateTexture(sdl->texture, NULL, sdl->pixels, WIDTH * 4);
 		SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
 		SDL_RenderPresent(sdl->renderer);
