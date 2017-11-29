@@ -1,33 +1,32 @@
-#* ************************************************************************** *#
-#*                                                                            *#
-#*                                                        :::      ::::::::   *#
-#*   Makefile                                           :+:      :+:    :+:   *#
-#*                                                    +:+ +:+         +:+     *#
-#*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        *#
-#*                                                +#+#+#+#+#+   +#+           *#
-#*   Created: 2016/11/18 02:18:30 by lmenigau          #+#    #+#             *#
-#*   Updated: 2017/11/25 19:36:16 by lmenigau         ###   ########.fr       *#
-#*                                                                            *#
-#* ************************************************************************** *#
+NAME= rtv1
+SRC= srcs/main.c
 
-NAME	=	rtv1
-CC		=	clang
-SRC		=	main.c
-OBJ		=	$(SRC:.c=.o)
-CFLAGS	=	-Weverything -Wall -Wextra -Werror -Iminilibx_macos/ -g -Ofast -march=native
-FFLAGS	=	-framework SDL2
+HDRS= includes/rt.h
 
-.PHONY	:	all clean fclean re lib
+OBJ= $(SRC:.c=.o)
+HDR_PATH= ./libft/includes/
+CC= gcc
+CC_FLAGS= -v -Winline -march=native -Ofast  -Weverything -Wall -Werror -Wextra  #-g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+LIBFT_PATH=./libft/
+SDL_LIB_PATH= ~/.brew/Cellar/sdl2/2.0.7/lib
+SDL_HDR_PATH= ~/.brew/Cellar/sdl2/2.0.7/include/SDL2/
+FLAGS= -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -isystem $(SDL_HDR_PATH) -framework OpenGL -framework AppKit -L $(SDL_LIB_PATH) -lSDL2
 
-all		:	$(NAME)
+all: submodule $(NAME)
 
-$(NAME)	:	$(OBJ) $(MLX)
-			$(CC) $(CFLAGS) $(FFLAGS) -o $@ $(OBJ)
+submodule:
+	@make -C libft/
 
-clean	:
-			$(RM) $(OBJ)
+$(NAME): $(OBJ)
+	$(CC) $(CC_FLAGS) $^ $(FLAGS) -o $(NAME)
+%.o : %.c $(HDRS)
+	$(CC) $(CC_FLAGS) $< -c -I$(HDR_PATH) -isystem $(SDL_HDR_PATH) -I./includes -o $@
 
-fclean	:	clean
-			$(RM) $(NAME)
+clean:
+	rm -f $(OBJ)
+	make -C $(LIBFT_PATH) clean
+fclean: clean
+	rm -f $(NAME)
+	make -C $(LIBFT_PATH) fclean
 
-re		:	fclean all
+re: fclean all
