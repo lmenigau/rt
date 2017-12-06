@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 19:33:44 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/11/29 14:49:14 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/12/06 14:08:05 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,14 @@ typedef struct		s_sdl
 	Uint32				*pixels;
 }					t_sdl;
 
-void		log_and_exit_on_error(void	*ptr);
-void		init_sdl(t_sdl *sdl);
-void		event_loop(t_sdl	*sdl);
+typedef struct		s_rt
+{
+	t_sdl			sdl;
+	t_obj			obj;
+}					t_rt;
+
+void		log_error(t_rt *env);
+void		init_sdl(char *name, t_rt *env);
+void		event_loop(t_rt *rt);
 void		sdl_cleanup(t_sdl	*sdl);
 #endif
