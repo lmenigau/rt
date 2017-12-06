@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 03:24:28 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/12/06 14:08:12 by jgourdin         ###   ########.fr       */
+/*   Updated: 2017/12/06 14:21:12 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		init_sdl(char *name, t_rt *env)
 	env->sdl.pixels = malloc(WIDTH * HEIGHT * 4);
 }
 
-void	event_loop(t_rt *rt)
+void	event_loop(t_rt *env)
 {
 	int			i;
 	SDL_Event	event;
@@ -44,9 +44,17 @@ void	event_loop(t_rt *rt)
 	{
 		SDL_PollEvent(&event);
 		if(event.type == SDL_QUIT)
-			break;
-		if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-			break;
+			cleanup(env);
+		if(event.type == SDL_KEYDOWN)
+		{
+			if (EVENT_KEY == SDLK_ESCAPE)
+				cleanup(env);
+		}
+		/*if (envent.type == SDL_KEYUP)
+		{
+			Pour plus tard si besoin...
+		}
+		*/
 		while (++i < (HEIGHT - 1) * WIDTH)
 				env->sdl.pixels[i] = 0xFFFFFF;
 		SDL_UpdateTexture(env->sdl.texture, NULL, env->sdl.pixels, WIDTH * 4);
@@ -74,6 +82,6 @@ int main(void)
 	env = (t_rt *)ft_memalloc(sizeof(t_rt));
 	init_sdl("Rt_Test", env);
 	event_loop(env);
+	cleanup(env);
 	return (0);
-
 }
