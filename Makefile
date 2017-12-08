@@ -4,13 +4,14 @@ SRC= srcs/main.c
 HDRS= includes/rt.h
 
 OBJ= $(SRC:.c=.o)
-HDR_PATH= ./libft/includes/
+HDR_PATH = ./libft/includes/
+SDL_HEADER := $(shell sdl2-config --cflags)
+SDL_LIB := $(shell sdl2-config --libs)
 CC= gcc
-CC_FLAGS= -v -Winline -march=native -Ofast  -Weverything -Wall -Werror -Wextra  #-g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
+IFLAGS := -I./includes -I$(HDR_PATH) $(SDL_HEADER) 
+CC_FLAGS = $(IFLAGS) -v -Winline -march=native -Ofast -Wall -Wextra  #-g3 -fsanitize=address -fsanitize-blacklist=my_ignores.txt
 LIBFT_PATH=./libft/
-SDL_LIB_PATH= ~/.brew/Cellar/sdl2/2.0.7/lib
-SDL_HDR_PATH= ~/.brew/Cellar/sdl2/2.0.7/include/SDL2/
-FLAGS= -L$(LIBFT_PATH) -lft -I$(HDR_PATH) -I./includes  -isystem $(SDL_HDR_PATH) -framework OpenGL -framework AppKit -L $(SDL_LIB_PATH) -lSDL2
+FLAGS= -L$(LIBFT_PATH) -lft -framework OpenGL -framework AppKit $(SDL_LIB)
 
 all: submodule $(NAME)
 
@@ -19,8 +20,9 @@ submodule:
 
 $(NAME): $(OBJ)
 	$(CC) $(CC_FLAGS) $^ $(FLAGS) -o $(NAME)
+
 %.o : %.c $(HDRS)
-	$(CC) $(CC_FLAGS) $< -c -I$(HDR_PATH) -isystem $(SDL_HDR_PATH) -I./includes -o $@
+	$(CC) $(CC_FLAGS) -c $< -c -o $@
 
 clean:
 	rm -f $(OBJ)

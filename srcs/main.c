@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 03:24:28 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/12/06 14:21:12 by jgourdin         ###   ########.fr       */
+/*   Updated: 2017/12/08 03:11:11 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	event_loop(t_rt *env)
 			cleanup(env);
 		if(event.type == SDL_KEYDOWN)
 		{
-			if (EVENT_KEY == SDLK_ESCAPE)
+			if (event.key.keysym.sym == SDLK_ESCAPE) 
 				cleanup(env);
 		}
 		/*if (envent.type == SDL_KEYUP)
@@ -79,7 +79,7 @@ int main(void)
 {
 	t_rt	*env;
 
-	env = (t_rt *)ft_memalloc(sizeof(t_rt));
+	env = (t_rt *)malloc(sizeof(t_rt));
 	init_sdl("Rt_Test", env);
 	event_loop(env);
 	cleanup(env);

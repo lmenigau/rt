@@ -6,16 +6,17 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 19:33:44 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/12/06 14:08:05 by jgourdin         ###   ########.fr       */
+/*   Updated: 2017/12/08 03:05:36 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 
-# include <SDL.h>
 # include <math.h>
 # include "openCL/opencl.h"
+# include <SDL.h>
+# include <SDL_events.h>
 #define WIDTH	1920
 #define HEIGHT	1080
 
@@ -69,4 +70,5 @@ void		log_error(t_rt *env);
 void		init_sdl(char *name, t_rt *env);
 void		event_loop(t_rt *rt);
 void		sdl_cleanup(t_sdl	*sdl);
+void		cleanup(t_rt	*env);
 #endif
