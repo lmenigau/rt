@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 03:24:28 by lmenigau          #+#    #+#             */
-/*   Updated: 2017/12/08 03:11:11 by lmenigau         ###   ########.fr       */
+/*   Updated: 2017/12/13 05:23:16 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,28 @@ void		init_sdl(char *name, t_rt *env)
 	env->sdl.pixels = malloc(WIDTH * HEIGHT * 4);
 }
 
+void		raytracing(t_rt *env)
+{
+	int			x;
+	int			y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH) 
+		{
+			env->sdl.pixels[y * WIDTH + x ] = 0xFFFFFF;
+			x++;
+		}
+		y++;
+	}
+}
+
 void	event_loop(t_rt *env)
 {
-	int			i;
 	SDL_Event	event;
 
-	i = -1;
 	while (42)
 	{
 		SDL_PollEvent(&event);
@@ -50,13 +66,7 @@ void	event_loop(t_rt *env)
 			if (event.key.keysym.sym == SDLK_ESCAPE) 
 				cleanup(env);
 		}
-		/*if (envent.type == SDL_KEYUP)
-		{
-			Pour plus tard si besoin...
-		}
-		*/
-		while (++i < (HEIGHT - 1) * WIDTH)
-				env->sdl.pixels[i] = 0xFFFFFF;
+		raytracing(env);
 		SDL_UpdateTexture(env->sdl.texture, NULL, env->sdl.pixels, WIDTH * 4);
 		SDL_RenderCopy(env->sdl.renderer, env->sdl.texture, NULL, NULL);
 		SDL_RenderPresent(env->sdl.renderer);
