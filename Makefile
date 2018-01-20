@@ -6,7 +6,7 @@
 #    By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/18 08:44:16 by mbeilles          #+#    #+#              #
-#    Updated: 2018/01/20 18:06:31 by mbeilles         ###   ########.fr        #
+#    Updated: 2018/01/20 18:30:28 by mbeilles         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -187,7 +187,8 @@ install_xml:
 	@$(XML_INSTALL_CMD)
 
 install_brew:
-	@$(BREW_INSTALL_CMD)
+	@if [ ! -f $(HOME)/.brew ]; then
+		$(BREW_INSTALL_CMD); fi
 
 re: fclean all
 
