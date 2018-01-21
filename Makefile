@@ -6,7 +6,7 @@
 #    By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/18 08:44:16 by mbeilles          #+#    #+#              #
-#    Updated: 2018/01/20 18:30:28 by mbeilles         ###   ########.fr        #
+#    Updated: 2018/01/20 20:27:25 by mbeilles         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ DEP = -L $(PATH_LIB) -lft													\
 	  -L $(XML_LIB_PATH) -lxml2												\
 
 SRC = main.c																\
+	  math.c																\
 
 INC = libft.h																\
 
