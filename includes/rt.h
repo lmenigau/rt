@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbeilles </var/mail/mbeilles>              +#+  +:+       +#+        */
+/*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/20 23:05:00 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/21 03:04:52 by mbeilles         ###   ########.fr       */
+/*   Created: 2018/01/21 03:28:23 by mbeilles          #+#    #+#             */
+/*   Updated: 2018/01/21 04:20:39 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define C_SUC				"\033[38;2;141;143;38m"
 # define C_ERR				"\033[38;2;231;76;60m"
 # define C_INF				"\033[38;2;243;156;18m"
+# define C_WRN				"\033[38;2;230;126;34m"
 
 # define C_RED				"\033[38;2;231;76;60m"
 # define C_ORA				"\033[38;2;230;126;34m"
@@ -63,22 +64,24 @@
 # define W_PIN				0xec407a
 
 # define C_WHI				"\033[38;2;236;240;241m"
-# define C_LGR				"\033[38;2;189;195;199m"
-# define C_MGR				"\033[38;2;149;165;166m"
-# define C_DGR				"\033[38;2;127;140;141m"
+# define C_LGR				"\033[38;2;146;131;116m"
+# define C_MGR				"\033[38;2;102;92;84m"
+# define C_DGR				"\033[38;2;60;56;54m"
 # define C_BLA				"\033[38;2;44;62;80m"
 
 # define W_WHI				0xecf0f1
-# define W_LGR				0xbdc3c7
-# define W_MGR				0x95a5a6
-# define W_DGR				0x7f8c8d
+# define W_LGR				0x928374
+# define W_MGR				0x665c64
+# define W_DGR				0x3C3836
 # define W_BLA				0x2c3e50
 
 # define C_NRM				"\033[0m"
 
-# define HEADER				C_MGR "[" C_ORA "RT1" C_MGR "] " C_DGR "- " C_NRM
+# define HEADER				C_MGR "[" C_ORA "RTv1" C_MGR "]" C_DGR "-" C_NRM
 
-# define STR_INFO(str)		HEADER str "\n" C_NRM
+# define STR_INFO(s)		HEADER C_LGR "[" C_INF "i" C_LGR "] " C_MGR s C_NRM
+# define STR_EROR(s)		HEADER C_LGR "[" C_ERR "-" C_LGR "] " C_MGR s C_NRM
+# define STR_WARN(s)		HEADER C_LGR "[" C_WRN "!" C_LGR "] " C_MGR s C_NRM
 
 /*
 ** =============================================================================
@@ -105,6 +108,14 @@ typedef struct				s_vec3
 	t_vec_type				z;
 }							t_vec3;
 
+typedef struct				s_vec4
+{
+	t_vec_type				w;
+	t_vec_type				x;
+	t_vec_type				y;
+	t_vec_type				z;
+}							t_vec4;
+
 typedef struct				s_part_color
 {
 	uint32_t				a : 8;
@@ -128,7 +139,9 @@ typedef union				u_color
 typedef struct				s_cam
 {
 	t_vec3					pos;
-	t_vec3					dir;
+	t_vec3					yaw;
+	t_vec3					roll;
+	t_vec3					pitch;
 	t_vec_type				fov_h;
 	t_vec_type				fov_v;
 }							t_cam;
@@ -222,7 +235,7 @@ typedef union				u_object
 ** =============================================================================
 */
 
-typedef uint32_t			(*t_input_function)(SDL_Keycode);
+typedef uint32_t			(*t_input_function)(SDL_Event);
 
 typedef struct				s_context
 {

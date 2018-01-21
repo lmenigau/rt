@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 04:20:12 by lmenigau          #+#    #+#             */
-/*   Updated: 2018/01/20 21:19:53 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/21 04:13:01 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 #include	<math.h>
 #include	"rt.h"
 
+t_vec2		vec2(t_vec_type x, t_vec_type y)
+{
+	return ((t_vec2){x, y});
+}
+
 t_vec3		vec3(t_vec_type x, t_vec_type y, t_vec_type z)
 {
 	return ((t_vec3){x, y, z});
+}
+
+t_vec4		vec4(t_vec_type w, t_vec_type x, t_vec_type y, t_vec_type z)
+{
+	return ((t_vec4){w, x, y, z});
 }
 
 t_vec_type	dot3(t_vec3 a, t_vec3 b)
@@ -53,4 +63,9 @@ t_vec3		sub3(t_vec3 a, t_vec3 b)
 t_vec3		norm3(t_vec3 v)
 {
 	return (scal3(v, 1.0f / mag3(v)));
+}
+
+t_vec3		rotate_quaternion(t_vec3 target, t_vec3 source)
+{
+
 }
