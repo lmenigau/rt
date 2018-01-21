@@ -6,7 +6,7 @@
 #    By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/18 08:44:16 by mbeilles          #+#    #+#              #
-#    Updated: 2018/01/20 20:27:25 by mbeilles         ###   ########.fr        #
+#    Updated: 2018/01/21 03:04:45 by mbeilles         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ NICK = "RT1"
 
 CC = clang
 
-FLAGS = $(HIDDEN_FLAGS) $(NAZI_FLAG) -fsanitize=address #-g3 -O0\
+FLAGS = $(HIDDEN_FLAGS) $(NAZI_FLAG) -fsanitize=address -g3 -O0\
 
-CFLAG = -Ofast -I$(PATH_INC) -I$(PATH_LIB)$(PATH_INC) \
+CFLAG = $(FLAGS) -I$(PATH_INC) -I$(PATH_LIB)$(PATH_INC) \
 		-isystem $(SDL_HDR_PATH) -isystem $(SDL_IMG_HDR_PATH) \
 		-isystem $(XML_HDR_PATH) \
 
-HIDDEN_FLAGS = -v \
+HIDDEN_FLAGS = #-v \
 
 NAZI_FLAG = -Weverything \
 
@@ -91,8 +91,10 @@ DEP = -L $(PATH_LIB) -lft													\
 
 SRC = main.c																\
 	  math.c																\
+	  utils.c																\
 
 INC = libft.h																\
+	  rt.h																	\
 
 #==============================================================================#
 #                                    Vpaths                                    #

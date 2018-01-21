@@ -6,15 +6,16 @@
 /*   By: mbeilles </var/mail/mbeilles>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 00:54:33 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/21 01:07:20 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/21 03:03:03 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt.h>
 
-uint32_t			leave(char *str)
+NORETURN			leave(char *str)
 {
 	if (str)
 		ft_putstr(str);
-	ft_putstr(STR_)
+	ft_putstr(STR_INFO("leave"));
+	exit(EXIT_SUCCESS);
 }

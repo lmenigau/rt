@@ -6,7 +6,7 @@
 /*   By: mbeilles </var/mail/mbeilles>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/20 23:05:00 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/21 01:03:01 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/21 03:04:52 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,28 @@
 
 # include <stdint.h>
 # include "SDL.h"
+# include "libft.h"
 
 /*
 ** =============================================================================
-** 		Colors
+** 								Variables
+** =============================================================================
+*/
+
+# define WIDTH				1920
+# define HEIGHT				1080
+# define TITLE				"RTv1"
+
+# define FOV_H				90.0f
+# define FOV_V				(int32_t)(FOV_H * (double)HEIGHT / (double)WIDTH)
+
+/*
+** =============================================================================
+**
+** 								Strings
+**
+** =============================================================================
+** 								Colors
 ** =============================================================================
 */
 
@@ -58,17 +76,9 @@
 
 # define C_NRM				"\033[0m"
 
-/*
-** =============================================================================
-**
-** 								Strings
-**
-** =============================================================================
-*/
+# define HEADER				C_MGR "[" C_ORA "RT1" C_MGR "] " C_DGR "- " C_NRM
 
-# define HEADER				"[ " "RT1" " ] - " C_NRM
-
-# define STR_INFO(str)		
+# define STR_INFO(str)		HEADER str "\n" C_NRM
 
 /*
 ** =============================================================================
@@ -140,7 +150,7 @@ typedef enum				e_obj_type
 	OBJ_NONE
 }							t_obj_type;
 
-typedef struct				s_obj_template;
+typedef struct				s_obj_template
 {
 	t_obj_type				type;
 	t_color					col;
@@ -241,6 +251,6 @@ inline t_vec3				add3(t_vec3 a, t_vec3 b);
 inline t_vec3				sub3(t_vec3 a, t_vec3 b);
 inline t_vec3				norm3(t_vec3 a);
 
-
+NORETURN					leave(char *str);
 
 #endif
