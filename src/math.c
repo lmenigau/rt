@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 04:20:12 by lmenigau          #+#    #+#             */
-/*   Updated: 2018/01/21 04:13:01 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:50:45 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_vec3		norm3(t_vec3 v)
 	return (scal3(v, 1.0f / mag3(v)));
 }
 
-t_vec3		rotate_quaternion(t_vec3 target, t_vec3 source)
-{
-
-}
+/*t_vec3		rotate_quaternion(t_vec3 target, t_vec3 source)*/
+/*{*/
+	
+/*}*/

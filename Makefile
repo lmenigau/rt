@@ -6,7 +6,7 @@
 #    By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/18 08:44:16 by mbeilles          #+#    #+#              #
-#    Updated: 2018/01/21 03:04:45 by mbeilles         ###   ########.fr        #
+#    Updated: 2018/01/22 22:34:30 by mbeilles         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,8 +92,12 @@ DEP = -L $(PATH_LIB) -lft													\
 SRC = main.c																\
 	  math.c																\
 	  utils.c																\
+	  input_interface.c														\
+	  input_binding.c														\
+	  code_manipulation.c													\
 
 INC = libft.h																\
+	  input_interface.h														\
 	  rt.h																	\
 
 #==============================================================================#
@@ -101,6 +105,7 @@ INC = libft.h																\
 #==============================================================================#
 
 vpath %.c $(PATH_SRC)
+vpath %.c $(PATH_SRC)/input_interface
 vpath %.o $(PATH_OBJ)
 vpath %.h $(PATH_INC)
 vpath %.h $(PATH_LIB)$(PATH_INC)

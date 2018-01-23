@@ -6,17 +6,17 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 03:28:36 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/21 04:22:54 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 00:52:38 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <float.h>
 #include "rt.h"
 
-static void			init_keyboard_config(t_context *ctx)
-{
-	ctx->key_functions[SDL_SCANCODE_ESCAPE] = &leave;
-}
+/*static void			init_keyboard_config(t_context *ctx)*/
+/*{*/
+	/*ctx->key_functions[SDL_SCANCODE_ESCAPE] = &leave;*/
+/*}*/
 
 static t_context	init_context(void)
 {
@@ -28,17 +28,19 @@ static t_context	init_context(void)
 					, (t_vec3){0.0, 0.0, 0.0}	// Yaw
 					, (t_vec3){0.0, 0.0, 0.0}	// Roll
 					, (t_vec3){0.0, 0.0, 1.0}	// Pitch
-					, FOV_H, FOV_H};			// Fov
+					, FOV_H, FOV_V};			// Fov
 	ctx.win = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED
-		, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+			, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 	ctx.surface = SDL_GetWindowSurface(ctx.win);
-	if (!(ctx.key_functions = (t_input_function*)ft_memalloc(SDL_NUM_SCANCODES
-			* sizeof(t_input_function))) &&
-		!(ctx.mouse_functions = (t_input_function*)ft_memalloc(5
-			* sizeof(t_input_function))))
-		leave(NULL);
+	/*if (!(ctx.key_functions = (t_input_function*)ft_memalloc(SDL_NUM_SCANCODES*/
+					/** sizeof(t_input_function))) &&*/
+			/*!(ctx.mouse_functions = (t_input_function*)ft_memalloc(5*/
+					/** sizeof(t_input_function))))*/
+		/*leave(NULL);*/
 	ctx.objs = NULL;
-	init_keyboard_config(&ctx);
+	start_input_interface();
+	bind_input_code(add_input_code(((t_input_code){0, 0, 0, 0, 0}), SDL_SCANCODE_ESCAPE), &leave);
+	/*init_keyboard_config(&ctx);*/
 	return (ctx);
 }
 
@@ -54,14 +56,15 @@ int					main(int c, char **v)
 	ctx = init_context();
 	while (!quit)
 	{
+		scan_inputs();
 		while (SDL_PollEvent(&e))
 		{
 			if (e.type == SDL_QUIT)
 				quit = 1;
-			if (e.type == SDL_KEYDOWN &&
-	(ctx.key_functions)[SDL_GetScancodeFromKey(e.key.keysym.sym)])
-				(ctx.key_functions)[
-					SDL_GetScancodeFromKey(e.key.keysym.sym)](e);
+			/*if (e.type == SDL_KEYDOWN &&*/
+			/*(ctx.key_functions)[SDL_GetScancodeFromKey(e.key.keysym.sym)])*/
+			/*(ctx.key_functions)[*/
+			/*SDL_GetScancodeFromKey(e.key.keysym.sym)](e);*/
 			SDL_UpdateWindowSurface(ctx.win);
 		}
 	}

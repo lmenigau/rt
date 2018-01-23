@@ -6,7 +6,7 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 03:28:23 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/21 04:20:39 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 00:52:26 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdint.h>
 # include "SDL.h"
 # include "libft.h"
+# include "input_interface.h"
 
 /*
 ** =============================================================================
@@ -28,7 +29,7 @@
 # define TITLE				"RTv1"
 
 # define FOV_H				90.0f
-# define FOV_V				(int32_t)(FOV_H * (double)HEIGHT / (double)WIDTH)
+# define FOV_V				(float)(FOV_H * (double)HEIGHT / (double)WIDTH)
 
 /*
 ** =============================================================================
@@ -235,15 +236,11 @@ typedef union				u_object
 ** =============================================================================
 */
 
-typedef uint32_t			(*t_input_function)(SDL_Event);
-
 typedef struct				s_context
 {
 	t_cam					cam;
 	SDL_Window				*win;
 	SDL_Surface				*surface;
-	t_input_function		*key_functions;
-	t_input_function		*mouse_functions;
 	t_object				*objs;
 }							t_context;
 
@@ -255,7 +252,9 @@ typedef struct				s_context
 ** =============================================================================
 */
 
+inline t_vec2				vec2(t_vec_type x, t_vec_type y);
 inline t_vec3				vec3(t_vec_type x, t_vec_type y, t_vec_type z);
+inline t_vec4				vec4(t_vec_type w, t_vec_type x, t_vec_type y, t_vec_type z);
 inline t_vec_type			dot3(t_vec3 a, t_vec3 b);
 inline t_vec_type			mag3(t_vec3 a);
 inline t_vec3				cross3(t_vec3 a, t_vec3 b);
