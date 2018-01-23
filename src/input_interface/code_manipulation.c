@@ -6,7 +6,7 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 21:16:13 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 01:01:54 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 02:03:35 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_input_code		add_input_code(t_input_code code, uint32_t scan_code)
 {
-	printf("OK!\n");
 	if (scan_code > 64U)
 		if (scan_code > 128U)
 			if (scan_code > 192U)

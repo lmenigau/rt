@@ -6,21 +6,18 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 03:28:36 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 00:52:38 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 02:13:16 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <float.h>
+#include <pthread.h>
 #include "rt.h"
-
-/*static void			init_keyboard_config(t_context *ctx)*/
-/*{*/
-	/*ctx->key_functions[SDL_SCANCODE_ESCAPE] = &leave;*/
-/*}*/
 
 static t_context	init_context(void)
 {
 	t_context		ctx;
+	pthread_t		t;
 
 	if (SDL_Init(SDL_INIT_VIDEO))
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
@@ -39,7 +36,7 @@ static t_context	init_context(void)
 		/*leave(NULL);*/
 	ctx.objs = NULL;
 	start_input_interface();
-	bind_input_code(add_input_code(((t_input_code){0, 0, 0, 0, 0}), SDL_SCANCODE_ESCAPE), &leave);
+	bind_input_code(add_input_code(add_input_code(((t_input_code){0, 0, 0, 0, 0}), SDL_SCANCODE_ESCAPE), SDL_SCANCODE_LCTRL), &leave);
 	/*init_keyboard_config(&ctx);*/
 	return (ctx);
 }
@@ -56,9 +53,9 @@ int					main(int c, char **v)
 	ctx = init_context();
 	while (!quit)
 	{
-		scan_inputs();
 		while (SDL_PollEvent(&e))
 		{
+			scan_inputs(e);
 			if (e.type == SDL_QUIT)
 				quit = 1;
 			/*if (e.type == SDL_KEYDOWN &&*/

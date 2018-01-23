@@ -6,7 +6,7 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 19:12:40 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 01:01:59 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 02:13:33 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void					bind_input_code(t_input_code c, t_input_function *f);
 void					unbind_input_code(t_input_code c);
 
 uint32_t				start_input_interface(void);
-void					scan_inputs(void);
+void					scan_inputs(SDL_Event e);
 
 t_input_code			add_input_code(t_input_code, uint32_t scan_code);
 t_input_code			del_input_code(t_input_code, uint32_t scan_code);

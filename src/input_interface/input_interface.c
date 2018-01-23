@@ -6,11 +6,11 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 01:03:06 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 01:55:57 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 02:21:29 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input_interface.h"
+#include "rt.h"
 
 t_input_interface			*get_inputs(void)
 {
@@ -30,18 +30,25 @@ uint32_t					start_input_interface(void)
 	return (0);
 }
 
-void						scan_inputs(void)
+void						scan_inputs(SDL_Event e)
 {
-	SDL_Event				e;
 	t_input_interface		*i;
 	t_input					*input;
 
 	i = get_inputs();
-	if (SDL_PollEvent(&e))
+	if (e.type == SDL_KEYDOWN)
 	{
-		if (e.type == SDL_KEYDOWN || e.type == SDL_KEYUP)
-			i->actual_inputs = toggle_input_code(i->actual_inputs
-					, SDL_GetScancodeFromKey(e.key.keysym.sym));
+		printf(STR_INFO(C_LGR "Key " C_BLU "▼ " C_MGR "[" C_LGR " %3i " C_MGR "]\n")
+				, SDL_GetScancodeFromKey(e.key.keysym.sym));
+		i->actual_inputs = add_input_code(i->actual_inputs
+				, SDL_GetScancodeFromKey(e.key.keysym.sym));
+	}
+	if (e.type == SDL_KEYUP)
+	{
+		printf(STR_INFO(C_LGR "Key " C_RED "▲ " C_MGR "[" C_LGR " %3i " C_MGR "]\n")
+				, SDL_GetScancodeFromKey(e.key.keysym.sym));
+		i->actual_inputs = del_input_code(i->actual_inputs
+				, SDL_GetScancodeFromKey(e.key.keysym.sym));
 	}
 	input = i->inputs;
 	while (input)
