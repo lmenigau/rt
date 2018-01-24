@@ -6,7 +6,7 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 17:38:09 by lmenigau          #+#    #+#             */
-/*   Updated: 2018/01/24 04:39:09 by lmenigau         ###   ########.fr       */
+/*   Updated: 2018/01/24 05:18:47 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct		s_ray
 typedef struct		s_sphere
 {
 	t_vec3			pos;
-	t_vec3			radius;
-	t_vec3			radius2;
+	t_vec_type		radius;
+	t_vec_type		radius2;
 }					t_sphere;
 
 int		quad_solver(float a, float b, float c, float *x0, float *x1)
@@ -55,15 +55,17 @@ int			intersect(t_ray ray, t_sphere sphere)
 	float	a, b, c, x0, x1;
 	t_vec3 	l;
 
-	l = sub3(ray.pos, obj.pos);
-	a = dot(ray.dir, ray.dir);
-	b = 2 * dot(ray.dir, l);
-	c = dot(l, l) - sphere.radius2;
+	l = sub3(ray.pos, sphere.pos);
+	a = dot3(ray.dir, ray.dir);
+	b = 2 * dot3(ray.dir, l);
+	c = dot3(l, l) - sphere.radius2;
 	quad_solver(a, b, c, &x0, &x1);
-	printf("%f, %f, x0, x1);
+	printf("%f, %f\n", x0, x1);
 }
 
 int		main()
 {
-	intersect();
+	t_ray 		ray;
+	t_sphere 	sphere;
+	intersect(ray, sphere);
 }
