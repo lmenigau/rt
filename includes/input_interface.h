@@ -6,7 +6,7 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 19:12:40 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 02:13:33 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 05:25:16 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "libft.h"
 
 # define INPUT_BLOCK	(sizeof(t_input_function) * 320)
+
+# define GENERATE_CODE()
 
 /*
 ** v2 should include faster finding of bind

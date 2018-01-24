@@ -6,7 +6,7 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 03:28:23 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 00:52:26 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 07:02:20 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdint.h>
 # include "SDL.h"
+# include "SDL_ttf.h"
 # include "libft.h"
 # include "input_interface.h"
 
@@ -254,7 +255,8 @@ typedef struct				s_context
 
 inline t_vec2				vec2(t_vec_type x, t_vec_type y);
 inline t_vec3				vec3(t_vec_type x, t_vec_type y, t_vec_type z);
-inline t_vec4				vec4(t_vec_type w, t_vec_type x, t_vec_type y, t_vec_type z);
+inline t_vec4				vec4(t_vec_type w, t_vec_type x, t_vec_type y
+								, t_vec_type z);
 inline t_vec_type			dot3(t_vec3 a, t_vec3 b);
 inline t_vec_type			mag3(t_vec3 a);
 inline t_vec3				cross3(t_vec3 a, t_vec3 b);

@@ -6,7 +6,7 @@
 #    By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/18 08:44:16 by mbeilles          #+#    #+#              #
-#    Updated: 2018/01/22 22:34:30 by mbeilles         ###   ########.fr        #
+#    Updated: 2018/01/23 06:56:57 by mbeilles         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ FLAGS = $(HIDDEN_FLAGS) $(NAZI_FLAG) -fsanitize=address -g3 -O0\
 
 CFLAG = $(FLAGS) -I$(PATH_INC) -I$(PATH_LIB)$(PATH_INC) \
 		-isystem $(SDL_HDR_PATH) -isystem $(SDL_IMG_HDR_PATH) \
-		-isystem $(XML_HDR_PATH) \
+		-isystem $(SDL_TTF_HDR_PATH) \
 
 HIDDEN_FLAGS = #-v \
 
@@ -48,8 +48,8 @@ SDL_LIB_PATH = ~/.brew/Cellar/sdl2/2.0.7/lib/
 SDL_HDR_PATH = ~/.brew/Cellar/sdl2/2.0.7/include/SDL2/
 SDL_IMG_LIB_PATH = ~/.brew/Cellar/sdl2_image/2.0.2/lib/
 SDL_IMG_HDR_PATH = ~/.brew/Cellar/sdl2_image/2.0.2/include/SDL2/
-XML_LIB_PATH = ~/.brew/Cellar/libxml2/2.9.7/lib/
-XML_HDR_PATH = ~/.brew/Cellar/libxml2/2.9.7/include/libxml2/libxml/
+SDL_TTF_LIB_PATH = ~/.brew/Cellar/sdl2_ttf/2.0.14/lib/
+SDL_TTF_HDR_PATH = ~/.brew/Cellar/sdl2_ttf/2.0.14/include/SDL2/
 
 VPATH = $(PATH_SRC):$(PATH_OBJ):$(PATH_INC)
 
@@ -75,9 +75,6 @@ SDL_INSTALL_CMD = printf $(HD)"Installing SDL2\n"$(NRM) \
 				  && printf $(HD)"Installing SDL2_Image\n"$(NRM) \
 				  && brew install sdl2_image ;\
 
-XML_INSTALL_CMD = printf $(HD)"Installing libxml2\n"$(NRM) \
-				  && brew install libxml2 ;\
-
 #==============================================================================#
 #                                   Sources                                    #
 #==============================================================================#
@@ -87,7 +84,7 @@ DEPENDECIES = make -C $(PATH_LIB) $(INSTRUCTION) HIDDEN_FLAGS=$(HIDDEN_FLAGS);\
 DEP = -L $(PATH_LIB) -lft													\
 	  -L $(SDL_LIB_PATH) -lsdl2												\
 	  -L $(SDL_IMG_LIB_PATH) -lsdl2_image									\
-	  -L $(XML_LIB_PATH) -lxml2												\
+	  -L $(SDL_TTF_LIB_PATH) -lsdl2_ttf										\
 
 SRC = main.c																\
 	  math.c																\
@@ -95,6 +92,7 @@ SRC = main.c																\
 	  input_interface.c														\
 	  input_binding.c														\
 	  code_manipulation.c													\
+	  display_ux.c															\
 
 INC = libft.h																\
 	  input_interface.h														\
@@ -106,6 +104,7 @@ INC = libft.h																\
 
 vpath %.c $(PATH_SRC)
 vpath %.c $(PATH_SRC)/input_interface
+vpath %.c $(PATH_SRC)/ux
 vpath %.o $(PATH_OBJ)
 vpath %.h $(PATH_INC)
 vpath %.h $(PATH_LIB)$(PATH_INC)
@@ -156,7 +155,6 @@ CLEANING_BINS = $(HD)$(OK)$(PROJECT_COLOR)"Binary cleaned\n"$(NRM)
 $(NAME): $(SRC_O) | $(INC)
 	@if [ $(INSTALL_BREW) == 1 ]; then $(BREW_INSTALL_CMD) fi;
 	@if [ $(INSTALL_SDL) == 1 ]; then $(SDL_INSTALL_CMD) fi;
-	@if [ $(INSTALL_XML) == 1 ]; then $(XML_INSTALL_CMD) fi;
 	@$(eval INSTRUCTION := all)
 	@if [ $(MAKE_DEP) == 1 ]; then $(DEPENDECIES) fi;
 	@printf $(MAKING_PROGRESS)

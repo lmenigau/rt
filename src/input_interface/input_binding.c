@@ -6,7 +6,7 @@
 /*   By: mbeilles <mbeilles@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 21:23:40 by mbeilles          #+#    #+#             */
-/*   Updated: 2018/01/23 00:56:46 by mbeilles         ###   ########.fr       */
+/*   Updated: 2018/01/23 05:41:54 by mbeilles         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void						bind_input_code(t_input_code c
 	t_input					*j;
 
 	i = get_inputs()->inputs;
+	if (!i)
+	{
+		get_inputs()->inputs = (t_input*)push_to_mem_block(
+				get_inputs()->memblock
+				, &((t_input){c, f, NULL}), sizeof(t_input));
+		return ;
+	}
+	j = NULL;
 	while (i)
 	{
 		if (ft_memcmp(&(i->code), &c, sizeof(c)) == 0)
@@ -26,13 +34,10 @@ void						bind_input_code(t_input_code c
 			i->function = f;
 			return ;
 		}
+		j = i;
 		i = i->next;
 	}
-	if (!i)
-		get_inputs()->inputs = (t_input*)push_to_mem_block((get_inputs())->memblock
-			, &((t_input){c, f, NULL}), sizeof(t_input));
-	else
-		i->next = (t_input*)push_to_mem_block((get_inputs())->memblock
+	j->next = (t_input*)push_to_mem_block((get_inputs())->memblock
 			, &((t_input){c, f, NULL}), sizeof(t_input));
 	(get_inputs()->input_number)++;
 }
