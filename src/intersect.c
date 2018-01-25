@@ -6,25 +6,12 @@
 /*   By: lmenigau <lmenigau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 17:38:09 by lmenigau          #+#    #+#             */
-/*   Updated: 2018/01/24 05:18:47 by lmenigau         ###   ########.fr       */
+/*   Updated: 2018/01/25 07:02:53 by lmenigau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"rt.h"
-
-typedef struct		s_ray
-{
-	t_vec3			pos;
-	t_vec3			dir;
-	t_vec3			t;
-}					t_ray;
-
-typedef struct		s_sphere
-{
-	t_vec3			pos;
-	t_vec_type		radius;
-	t_vec_type		radius2;
-}					t_sphere;
+#include	"intersect.h"
 
 int		quad_solver(float a, float b, float c, float *x0, float *x1)
 {
